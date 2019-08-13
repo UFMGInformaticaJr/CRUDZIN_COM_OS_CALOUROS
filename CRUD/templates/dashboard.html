@@ -38,10 +38,10 @@
        Tip 2: you can also add an image using data-image tag
    -->
        <div class="logo">
-         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+         <a href="{{url_for('index')}}" class="simple-text logo-mini">
            IJR
          </a>
-         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+         <a href="{{url_for('index')}}" class="simple-text logo-normal">
            Crudzin com a galera
          </a>
        </div>
@@ -63,9 +63,13 @@
        <!-- Navbar -->
        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
          <div class="container-fluid">
-           <div class="navbar-wrapper">
-             <a class="navbar-brand" href="#pablo">Crudzin</a>
-           </div>
+         
+           <div class="navbar-wrapper"  >
+            <div style="padding:2px;" style="display: inline !important;">
+                <a href="/red"><button style="width:20px; height:20px;background-color:red; border:none;"></button></a>
+                <a href="/yellow"><button style="width:20px; height:20px;background-color:yellow; border:none;"></button></a>
+                <a href="/green"><button style="width:20px; height:20px;background-color:green; border:none;"></button></a>
+                <a href="/grey"><button style="width:20px; height:20px;background-color:grey; border:none;"></button></a>
            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
              <span class="sr-only">Toggle navigation</span>
              <span class="navbar-toggler-icon icon-bar"></span>
@@ -89,11 +93,18 @@
             <form action="/adicionar" method="POST">
               <div class="modal-body">
                 <label>Titulo: </label>
-                <input name="titulo" type="text" value="aloha" class="form-control">
+                <input name="titulo" type="text" placeholder="Título" class="form-control">
                 <br/>
                 <label>Descrição: </label>
                 <textarea name="descricao" cols="30" rows="5" class="form-control"></textarea>
+                <label>Tag:</label>
+                <select name="categoria" class="form-control">
+                  <option value="red" style="color:red">Avassaladoramente importante</option>
+                  <option value="yellow" style="color:yellow">Medianamente importante médio</option>
+                  <option value="green" style="color:green">Mediocremente importante</option>
+                </select>
               </div>
+              
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-info">Adicionar</button>
@@ -109,11 +120,15 @@
            <!-- your content here -->
            <div class="row">
              <!--Comesso do For-->
+             
              {% for post in posts %}
+             
 
               <!--CARD DE SAD CAT-->
               <div class="card" style="width: 18rem; margin-left: 10px">
                 <div class="card-body">
+                  <div style="height: 8px; width: 8px; background-color: {{post.tema_cor}}">
+                  </div>
                   <h5 class="card-title">{{ post.titulo }}</h5>
                   <p class="card-text">{{ post.descricao }}</p>
                   <a href="#" data-toggle="modal" data-target="#editar{{post.id}}" class="btn btn-primary">Editar</a>
